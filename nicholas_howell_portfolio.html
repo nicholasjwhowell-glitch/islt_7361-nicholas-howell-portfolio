@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicholas Howell — Portfolio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&family=Uncial+Antiqua&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{animation:none !important;transition:none !important} }
+
+body{
+  font-family:'IM Fell English',Georgia,'Times New Roman',serif;
+  background-color:#ecdfb8;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Ctext x='35' y='48' text-anchor='middle' font-size='30' fill='rgba(139,105,20,0.06)' font-family='serif'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 15% 18%,rgba(205,160,65,.2) 0%,transparent 50%),
+    radial-gradient(ellipse at 85% 82%,rgba(150,105,25,.16) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 50%,rgba(236,223,184,.5) 0%,transparent 70%);
+  color:#2c1810;font-size:16px;line-height:1.8;
+}
+h1{font-family:'Cinzel Decorative',Georgia,serif;font-size:28px;font-weight:700;line-height:1.25}
+h2{font-family:'Cinzel',Georgia,serif;font-size:21px;font-weight:600;color:#5a1000;letter-spacing:.04em}
+h3{font-family:'Cinzel',Georgia,serif;font-size:15px;font-weight:600;color:#5a1000;margin-bottom:6px}
+a{color:#7a1c00}
+:focus-visible{outline:2px solid #c8962a;outline-offset:2px}
+
+/* page border */
+.ms-page-border{position:fixed;inset:8px;border:1.5px solid rgba(154,116,32,.28);pointer-events:none;z-index:9998;border-radius:2px}
+.ms-corner{position:absolute;font-size:18px;color:rgba(154,116,32,.65);line-height:1;font-family:Georgia,serif}
+.mc-tl{top:-9px;left:-9px}.mc-tr{top:-9px;right:-9px}.mc-bl{bottom:-9px;left:-9px}.mc-br{bottom:-9px;right:-9px}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:#2c1608;border-bottom:3px solid #c8962a;box-shadow:0 3px 14px rgba(0,0,0,.45);overflow-x:auto;white-space:nowrap}
+.nav-inner{display:flex;align-items:center;gap:18px;padding:12px 20px;width:max-content;min-width:100%}
+#navLogo{font-family:'Uncial Antiqua',cursive;font-size:13px;color:#e8c87a;letter-spacing:.04em;flex-shrink:0}
+#navLinks{flex-shrink:0}
+.nl{font-family:'Uncial Antiqua',cursive;font-size:11.5px;text-decoration:none;color:#e8c87a;padding:5px 9px;border-radius:3px;display:inline-block;letter-spacing:.03em}
+.nl:hover{background:rgba(200,150,42,.3);color:#fce7a4}
+.nl+.nl::before{content:'·';color:rgba(200,150,42,.4);margin-right:4px}
+.btn-edit{margin-left:auto;flex-shrink:0;background:#7a1c00;color:#f9d8a0;border:1.5px solid #c8962a;border-radius:4px;padding:8px 16px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.04em;cursor:pointer}
+.btn-edit:hover{background:#8d2010}
+
+/* toolbar */
+#toolbar{position:fixed;left:0;right:0;z-index:99;display:none;background:#1d1006;border-bottom:2px solid #c8962a;padding:9px 16px;align-items:center;gap:6px;flex-wrap:wrap;font-family:'Cinzel',serif}
+body.edit-mode #toolbar{display:flex}
+#toolbar button{background:rgba(255,255,255,.07);color:#e8c87a;border:1px solid rgba(200,150,42,.4);border-radius:4px;padding:6px 10px;font-family:'Cinzel',serif;font-size:11.5px;cursor:pointer}
+#toolbar button:hover{background:rgba(255,255,255,.15)}
+#toolbar .spacer{flex:1}
+#toolbar .ghost{background:none;border:none;color:#d8c79a;text-decoration:underline;cursor:pointer;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:12px}
+#savedPill{font-size:11.5px;color:#9fd8b9;opacity:0;transition:opacity .4s;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}
+#savedPill.show{opacity:1}
+
+main{display:block}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+section{padding:2.5rem 0 0}
+section:not(.hero-section)::before{content:'— ✦ —';display:block;text-align:center;font-size:15px;color:rgba(154,116,32,.65);padding-bottom:1.1rem;letter-spacing:.3em}
+section:not(.hero-section){padding-top:2rem}
+
+/* hero / closing panel (crimson + gold) */
+.hero{background:linear-gradient(145deg,#4a1008,#6b2510,#7a3a1a);border:3px solid #c8962a;border-radius:5px;padding:2rem;margin-bottom:1rem;position:relative;overflow:hidden;box-shadow:0 6px 28px rgba(0,0,0,.4),inset 0 0 80px rgba(0,0,0,.2)}
+.hero::before{content:'';position:absolute;inset:8px;border:1px solid rgba(200,150,42,.45);border-radius:3px;pointer-events:none}
+.hero-cross-area{display:flex;justify-content:center;align-items:center;gap:24px;margin-bottom:1.25rem;position:relative;z-index:1}
+.eyebrow-hero{font-size:11px;font-weight:700;color:#f9d8a0;letter-spacing:.12em;text-transform:uppercase;font-family:'Cinzel',serif;margin-bottom:.5rem}
+.drop-cap::first-letter{font-family:'Cinzel Decorative',serif;font-size:4em;font-weight:700;color:#f9d8a0;float:left;line-height:.75;padding-right:9px;padding-top:6px;text-shadow:2px 2px 0 rgba(200,150,42,.55)}
+.hero-section{animation:rise .7s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* cards */
+.card{background:#f7f0d8;border:2px solid #9a7420;border-radius:3px;padding:1.25rem 1.5rem;margin-bottom:0;box-shadow:inset 0 0 60px rgba(139,105,20,.05),3px 3px 9px rgba(0,0,0,.12);position:relative}
+.card::before,.card::after{content:'✦';position:absolute;color:rgba(154,116,32,.5);font-size:11px;font-family:serif}
+.card::before{top:5px;left:7px}
+.card::after{bottom:5px;right:7px}
+.card-remove{display:none;position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;border:none;background:rgba(122,28,0,.12);color:#7a1c00;cursor:pointer;font-size:13px;line-height:1}
+body.edit-mode .card-remove{display:flex;align-items:center;justify-content:center}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:3px;letter-spacing:.05em;font-family:'Cinzel',serif;background:#fef3c7;color:#7a1c00;border:1px solid #c8962a;margin-bottom:9px}
+
+/* prose / editable affordance */
+.prose p{margin:0 0 14px}
+.prose p:last-child{margin-bottom:0}
+.editable{border-radius:3px;transition:background .15s}
+body.edit-mode .editable{cursor:text}
+body.edit-mode .editable:hover{background:rgba(154,116,32,.1)}
+body.edit-mode .editable:focus{background:rgba(154,116,32,.12);outline:1px dashed #9a7420}
+
+/* focus grid (about) */
+.focus-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem;margin-top:1.1rem}
+.focus-card{background:#f0e8c4;border:1.5px solid #9a7420;border-radius:3px;padding:1rem 1.1rem;box-shadow:2px 2px 6px rgba(0,0,0,.08)}
+.flabel{font-size:12px;font-weight:700;color:#7a1c00;margin-bottom:5px;font-family:'Cinzel',serif;letter-spacing:.04em}
+.fsub{font-size:13px;color:#3a2010;line-height:1.6}
+
+/* works grid */
+.works-grid{display:flex;flex-direction:column;gap:1.25rem;margin-top:1.1rem}
+.work-image{margin-bottom:0}
+.work-image.has-image{margin-bottom:12px}
+.work-image img{display:block;width:100%;border-radius:3px;margin-bottom:8px}
+.work-image-add{display:none;width:100%;padding:16px;border:1.5px dashed #9a7420;background:transparent;color:#7a1c00;font-family:'Cinzel',serif;font-size:12.5px;border-radius:4px;cursor:pointer}
+body.edit-mode .work-image:not(.has-image) .work-image-add{display:block;margin-bottom:12px}
+.work-image-controls{display:none;gap:8px;margin-bottom:10px}
+body.edit-mode .work-image.has-image .work-image-controls{display:flex}
+.work-image-controls button{font-size:11px;padding:5px 11px;border-radius:4px;font-family:'Cinzel',serif;cursor:pointer}
+.work-image-replace{background:#f0e8c4;border:1.5px solid #9a7420;color:#3a2010}
+.work-image-remove{background:#fee2e2;border:1.5px solid #fca5a5;color:#7f1d1d}
+#addCardBtn{display:none;width:100%;margin-top:1rem;background:transparent;border:1.5px dashed #9a7420;color:#7a1c00;border-radius:4px;padding:13px;font-family:'Cinzel',serif;font-size:12.5px;cursor:pointer}
+body.edit-mode #addCardBtn{display:block}
+
+/* gallery */
+#galleryItems{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.1rem}
+.gallery-block{background:#f7f0d8;border:1.5px solid #9a7420;border-radius:4px;padding:1rem;position:relative}
+.gallery-media img,.gallery-media video{display:block;width:100%;border-radius:3px}
+.gallery-media audio{width:100%}
+.gallery-caption{margin-top:.6rem;font-size:13.5px;color:#3a2010}
+.gallery-controls{display:none;gap:8px;margin-top:.7rem}
+body.edit-mode .gallery-controls{display:flex}
+.gallery-controls button{font-size:11px;padding:5px 11px;border-radius:4px;font-family:'Cinzel',serif;cursor:pointer}
+.gallery-replace{background:#f0e8c4;border:1.5px solid #9a7420;color:#3a2010}
+.gallery-remove{background:#fee2e2;border:1.5px solid #fca5a5;color:#7f1d1d}
+#galleryEmpty{font-size:13px;color:#6b5a3a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;grid-column:1/-1}
+.gallery-add-row{display:none;gap:10px;flex-wrap:wrap;margin-top:1rem}
+body.edit-mode .gallery-add-row{display:flex}
+.gallery-add-row button{flex:1;min-width:150px;border:1.5px dashed #9a7420;background:transparent;color:#7a1c00;padding:12px;font-family:'Cinzel',serif;font-size:12.5px;border-radius:4px;cursor:pointer}
+.gallery-add-row button:hover{background:rgba(154,116,32,.08)}
+
+footer{padding:2rem 0 2.5rem;text-align:center;font-size:13px;color:#e8c87a;background:#2c1608;border-top:3px solid #c8962a;margin-top:3rem;font-family:'Cinzel',Georgia,serif;letter-spacing:.03em}
+
+/* modals */
+.modal-overlay{position:fixed;inset:0;background:rgba(20,10,5,.55);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal-card{background:#f7f0d8;border:2.5px solid #9a7420;border-radius:6px;padding:1.75rem;max-width:440px;width:100%;box-shadow:0 10px 40px rgba(0,0,0,.4);position:relative;max-height:85vh;overflow-y:auto}
+.modal-card::before,.modal-card::after{content:'✦';position:absolute;color:rgba(154,116,32,.5);font-size:12px}
+.modal-card::before{top:8px;left:9px}
+.modal-card::after{bottom:8px;right:9px}
+.modal-card h3{margin-bottom:.85rem}
+.mm-label{font-size:11.5px;font-family:'Cinzel',serif;color:#7a1c00;letter-spacing:.04em;margin-bottom:5px;display:block}
+.mm-hint{font-size:12.5px;color:#6b5a3a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;margin-bottom:.75rem;line-height:1.5}
+.mm-err{font-size:12.5px;color:#991b1b;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;margin-top:7px}
+input[type=text]{width:100%;padding:9px 12px;border:1px solid #c9c2b6;border-radius:5px;font-size:13px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#fff;color:#1a1a1a}
+input[type=text]:focus{outline:none;border-color:#9a7420;box-shadow:0 0 0 3px rgba(154,116,32,.15)}
+.or-divider{display:flex;align-items:center;gap:10px;margin:1rem 0}
+.or-divider div{flex:1;height:1px;background:#d4c498}
+.or-divider span{font-size:11px;color:#8b6914;font-family:'Cinzel',serif;letter-spacing:.06em}
+.uz{display:flex;align-items:center;gap:10px;padding:.75rem 1rem;border:1.5px dashed #9a7420;border-radius:4px;cursor:pointer;color:#3a2010;font-size:12.5px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f0e8c4}
+.uz:hover{background:#e4d8a8}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:1.3rem}
+button.primary{background:#7a1c00;color:#f9d8a0;border:1.5px solid #5a1000;border-radius:4px;padding:9px 18px;font-family:'Cinzel',serif;font-size:12.5px;cursor:pointer}
+button.primary:hover{background:#8d2010}
+button.secondary{background:#f0e8c4;color:#2c1810;border:1.5px solid #9a7420;border-radius:4px;padding:9px 18px;font-family:'Cinzel',serif;font-size:12.5px;cursor:pointer}
+button.secondary:hover{background:#e4d8a8}
+.history-row{display:flex;justify-content:space-between;align-items:center;padding:11px 4px;border-bottom:1px solid #e3d6a8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;font-size:13px;color:#2c1810}
+.history-restore{font-size:11.5px;padding:6px 13px;border-radius:4px;font-family:'Cinzel',serif;background:#f0e8c4;border:1.5px solid #9a7420;color:#3a2010;cursor:pointer}
+#historyList{max-height:280px;overflow-y:auto;margin-bottom:.5rem}
+</style>
+</head>
+<body>
+
+<div class="ms-page-border" aria-hidden="true"><span class="ms-corner mc-tl">✦</span><span class="ms-corner mc-tr">✦</span><span class="ms-corner mc-bl">✦</span><span class="ms-corner mc-br">✦</span></div>
+
+<nav>
+  <div class="nav-inner">
+    <span id="navLogo" class="editable" contenteditable="false">✦ Nicholas Howell ✦</span>
+    <span id="navLinks">
+      <a class="nl" href="#intro"><span class="editable" contenteditable="false">Intro</span></a>
+      <a class="nl" href="#about"><span class="editable" contenteditable="false">About</span></a>
+      <a class="nl" href="#works"><span class="editable" contenteditable="false">Works</span></a>
+      <a class="nl" href="#gallery"><span class="editable" contenteditable="false">Gallery</span></a>
+      <a class="nl" href="#contact"><span class="editable" contenteditable="false">Contact</span></a>
+    </span>
+    <button class="btn-edit" id="editToggle">Edit</button>
+  </div>
+</nav>
+
+<div id="toolbar">
+  <button data-cmd="bold" title="Bold"><b>B</b></button>
+  <button data-cmd="italic" title="Italic"><i>I</i></button>
+  <button data-block="h2" title="Heading">H2</button>
+  <button data-block="h3" title="Subheading">H3</button>
+  <button data-block="p" title="Paragraph">¶</button>
+  <button data-cmd="insertUnorderedList" title="Bullet list">• List</button>
+  <button data-cmd="insertOrderedList" title="Numbered list">1. List</button>
+  <button data-cmd="createLink" title="Link">Link</button>
+  <button data-cmd="removeFormat" title="Clear formatting">Clear</button>
+  <span class="spacer"></span>
+  <span id="savedPill">Saved</span>
+  <button class="ghost" id="historyBtn" type="button">History</button>
+  <button class="ghost" id="saveVersionBtn" type="button">Save Version</button>
+  <button class="ghost" id="resetBtn" type="button">Reset</button>
+</div>
+
+<main id="mainEl">
+<div class="wrap">
+
+  <section id="intro" class="hero-section">
+    <div class="hero">
+      <div class="hero-cross-area" aria-hidden="true">
+        <svg viewBox="0 0 24 60" width="16" height="40"><line x1="12" y1="4" x2="12" y2="56" stroke="#c8962a" stroke-width="2"/><circle cx="12" cy="4" r="4" fill="#c8962a"/><circle cx="12" cy="20" r="2.5" fill="#c8962a"/><circle cx="12" cy="40" r="2.5" fill="#c8962a"/><circle cx="12" cy="56" r="4" fill="#c8962a"/></svg>
+        <svg viewBox="0 0 100 100" width="80" height="80">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(200,150,42,.35)" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="40" fill="#7a1c00" stroke="#c8962a" stroke-width="2.5"/>
+          <text x="50" y="65" text-anchor="middle" font-family="Cinzel Decorative, serif" font-size="42" fill="#f9d8a0">N</text>
+          <circle cx="50" cy="6" r="3" fill="#c8962a"/><circle cx="50" cy="94" r="3" fill="#c8962a"/>
+          <circle cx="6" cy="50" r="3" fill="#c8962a"/><circle cx="94" cy="50" r="3" fill="#c8962a"/>
+        </svg>
+        <svg viewBox="0 0 24 60" width="16" height="40"><line x1="12" y1="4" x2="12" y2="56" stroke="#c8962a" stroke-width="2"/><circle cx="12" cy="4" r="4" fill="#c8962a"/><circle cx="12" cy="20" r="2.5" fill="#c8962a"/><circle cx="12" cy="40" r="2.5" fill="#c8962a"/><circle cx="12" cy="56" r="4" fill="#c8962a"/></svg>
+      </div>
+      <p class="eyebrow-hero editable" data-key="heroEyebrow" contenteditable="false" style="text-align:center">Welcome to the portfolio of</p>
+      <h1 class="editable" data-key="heroTitle" contenteditable="false" style="color:#fff;text-align:center;margin-bottom:1rem">Nicholas Howell</h1>
+      <p class="drop-cap editable" data-key="heroIntro" contenteditable="false" style="font-size:15px;color:#f9d8a0;line-height:1.75">Nicholas Howell is a [add your role or field here] with a passion for [add what drives your work]. This page gathers selected projects, writing, and media — illuminated, like the manuscripts of old, with a little gold leaf and a lot of care. Click "Edit" above to make it your own.</p>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="editable" data-key="aboutHeading" contenteditable="false">About</h2>
+    <div class="prose editable" data-key="aboutText" contenteditable="false" style="margin-top:.6rem">
+      <p>Add a short biography here — where you study or work, what you focus on, and what makes your approach distinct. This whole paragraph is editable, so write it in your own voice.</p>
+    </div>
+    <div class="focus-grid" id="focusGrid">
+      <div class="focus-card"><p class="flabel editable" contenteditable="false">Research</p><p class="fsub editable" contenteditable="false">Describe a skill, subject, or focus area.</p></div>
+      <div class="focus-card"><p class="flabel editable" contenteditable="false">Writing</p><p class="fsub editable" contenteditable="false">Describe another area of strength.</p></div>
+      <div class="focus-card"><p class="flabel editable" contenteditable="false">Craft</p><p class="fsub editable" contenteditable="false">Describe a third — methods, tools, or values.</p></div>
+    </div>
+  </section>
+
+  <section id="works">
+    <h2 class="editable" data-key="worksHeading" contenteditable="false">Selected Works</h2>
+    <div class="works-grid" id="worksCards">
+      <div class="card">
+        <button class="card-remove" type="button" title="Remove">×</button>
+        <div class="work-image"><button type="button" class="work-image-add">+ Add Image</button></div>
+        <span class="tag editable" contenteditable="false">Project</span>
+        <h3 class="editable" contenteditable="false">Project Title One</h3>
+        <p class="editable" contenteditable="false">A short description of this project — what it was, what you did, and why it mattered.</p>
+      </div>
+      <div class="card">
+        <button class="card-remove" type="button" title="Remove">×</button>
+        <div class="work-image"><button type="button" class="work-image-add">+ Add Image</button></div>
+        <span class="tag editable" contenteditable="false">Project</span>
+        <h3 class="editable" contenteditable="false">Project Title Two</h3>
+        <p class="editable" contenteditable="false">A short description of this project — what it was, what you did, and why it mattered.</p>
+      </div>
+      <div class="card">
+        <button class="card-remove" type="button" title="Remove">×</button>
+        <div class="work-image"><button type="button" class="work-image-add">+ Add Image</button></div>
+        <span class="tag editable" contenteditable="false">Project</span>
+        <h3 class="editable" contenteditable="false">Project Title Three</h3>
+        <p class="editable" contenteditable="false">A short description of this project — what it was, what you did, and why it mattered.</p>
+      </div>
+    </div>
+    <button id="addCardBtn" type="button">+ Add a work</button>
+  </section>
+
+  <section id="gallery">
+    <h2 class="editable" data-key="galleryHeading" contenteditable="false">Gallery</h2>
+    <div id="galleryItems">
+      <p id="galleryEmpty">No media yet — use the buttons below to add an image, audio clip, or video.</p>
+    </div>
+    <div class="gallery-add-row">
+      <button type="button" id="addImageBtn">🖼 Add Image</button>
+      <button type="button" id="addAudioBtn">🎵 Add Audio</button>
+      <button type="button" id="addVideoBtn">🎬 Add Video</button>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="hero">
+      <h2 class="editable" data-key="contactHeading" contenteditable="false" style="color:#fff">Get in Touch</h2>
+      <div class="editable" data-key="contactText" contenteditable="false" style="margin-top:.6rem;color:#f9d8a0">
+        <p>Interested in working together, or just want to talk history? Reach out below.</p>
+        <p>Email: <a href="mailto:nicholas.howell@example.com" style="color:#fce7a4">nicholas.howell@example.com</a></p>
+      </div>
+    </div>
+  </section>
+
+</div>
+<footer>
+  <p class="editable" data-key="footerText" contenteditable="false">✦ Illuminated &amp; maintained by Nicholas Howell ✦</p>
+</footer>
+</main>
+
+<!-- media insert/replace modal -->
+<div class="modal-overlay" id="mediaOverlay">
+  <div class="modal-card">
+    <h3 id="mmTitle">Add an Image</h3>
+    <label class="mm-label">Paste a link</label>
+    <input type="text" id="mmUrl" placeholder="https://...">
+    <p class="mm-err" id="mmErr" style="display:none"></p>
+    <div id="mmUploadRow">
+      <div class="or-divider"><div></div><span>or</span><div></div></div>
+      <label class="uz" id="mmUploadLabel">
+        <span style="font-size:18px">📜</span>
+        <span>Upload an image from your device (max 1.5MB)</span>
+        <input type="file" id="mmFile" accept="image/*" style="display:none">
+      </label>
+      <p class="mm-hint" id="mmFileName" style="display:none;margin-top:6px"></p>
+    </div>
+    <div class="modal-actions">
+      <button class="secondary" id="mmCancel" type="button">Cancel</button>
+      <button class="primary" id="mmEmbed" type="button">Embed</button>
+    </div>
+  </div>
+</div>
+
+<!-- history modal -->
+<div class="modal-overlay" id="historyOverlay">
+  <div class="modal-card">
+    <h3>Version History</h3>
+    <p class="mm-hint">Restoring a version replaces your current content. Up to the last 8 saved versions are kept.</p>
+    <div id="historyList"></div>
+    <div class="modal-actions">
+      <button class="secondary" id="historyClose" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const body = document.body;
+const nav = document.querySelector('nav');
+const toolbar = document.getElementById('toolbar');
+const mainEl = document.getElementById('mainEl');
+const editToggle = document.getElementById('editToggle');
+const savedPill = document.getElementById('savedPill');
+const worksCards = document.getElementById('worksCards');
+const addCardBtn = document.getElementById('addCardBtn');
+const galleryItems = document.getElementById('galleryItems');
+const galleryEmpty = document.getElementById('galleryEmpty');
+const navLinksEl = document.getElementById('navLinks');
+const resetBtn = document.getElementById('resetBtn');
+const historyBtn = document.getElementById('historyBtn');
+const saveVersionBtn = document.getElementById('saveVersionBtn');
+const mediaOverlay = document.getElementById('mediaOverlay');
+const mmTitle = document.getElementById('mmTitle');
+const mmUrl = document.getElementById('mmUrl');
+const mmErr = document.getElementById('mmErr');
+const mmUploadRow = document.getElementById('mmUploadRow');
+const mmFile = document.getElementById('mmFile');
+const mmFileName = document.getElementById('mmFileName');
+const mmCancel = document.getElementById('mmCancel');
+const mmEmbed = document.getElementById('mmEmbed');
+const historyOverlay = document.getElementById('historyOverlay');
+const historyList = document.getElementById('historyList');
+const historyClose = document.getElementById('historyClose');
+
+const KEY_CONTENT = 'nh-portfolio-content';
+const KEY_HISTORY = 'nh-portfolio-history';
+const REGIONS = [
+  ['navLogo', '#navLogo'],
+  ['navLinks', '#navLinks'],
+  ['heroEyebrow', '[data-key="heroEyebrow"]'],
+  ['heroTitle', '[data-key="heroTitle"]'],
+  ['heroIntro', '[data-key="heroIntro"]'],
+  ['aboutHeading', '[data-key="aboutHeading"]'],
+  ['aboutText', '[data-key="aboutText"]'],
+  ['focusGrid', '#focusGrid'],
+  ['worksHeading', '[data-key="worksHeading"]'],
+  ['worksCards', '#worksCards'],
+  ['galleryHeading', '[data-key="galleryHeading"]'],
+  ['galleryItems', '#galleryItems'],
+  ['contactHeading', '[data-key="contactHeading"]'],
+  ['contactText', '[data-key="contactText"]'],
+  ['footerText', '[data-key="footerText"]']
+];
+
+let lastFocused = null;
+let saveTimer = null;
+let sessionSnapshotAtStart = null;
+let currentMediaType = 'image';
+let currentContext = 'gallery'; // 'gallery' | 'work'
+let currentReplaceTarget = null;
+let currentWorkSlot = null;
+
+/* ---------- generic collect/apply ---------- */
+function collect(){
+  const obj = {};
+  REGIONS.forEach(([key, sel]) => {
+    const el = document.querySelector(sel);
+    if (el) obj[key] = el.innerHTML;
+  });
+  return obj;
+}
+function applyContent(obj){
+  REGIONS.forEach(([key, sel]) => {
+    if (obj[key] != null) {
+      const el = document.querySelector(sel);
+      if (el) el.innerHTML = obj[key];
+    }
+  });
+}
+
+/* ---------- edit mode ---------- */
+function syncEditableState(){
+  const editing = body.classList.contains('edit-mode');
+  document.querySelectorAll('.editable').forEach(el => {
+    el.setAttribute('contenteditable', editing ? 'true' : 'false');
+  });
+}
+function adjustMainPadding(){
+  const navH = nav.offsetHeight;
+  const toolH = body.classList.contains('edit-mode') ? toolbar.offsetHeight : 0;
+  mainEl.style.paddingTop = (navH + toolH + 14) + 'px';
+  toolbar.style.top = navH + 'px';
+}
+window.addEventListener('resize', adjustMainPadding);
+
+editToggle.addEventListener('click', async () => {
+  const turningOn = !body.classList.contains('edit-mode');
+  if (turningOn) sessionSnapshotAtStart = JSON.stringify(collect());
+  body.classList.toggle('edit-mode', turningOn);
+  editToggle.textContent = turningOn ? 'Done Editing' : 'Edit';
+  syncEditableState();
+  adjustMainPadding();
+  if (!turningOn) {
+    if (document.activeElement) document.activeElement.blur();
+    const nowSnap = JSON.stringify(collect());
+    if (sessionSnapshotAtStart !== null && nowSnap !== sessionSnapshotAtStart) {
+      await pushHistorySnapshot();
+    }
+    sessionSnapshotAtStart = null;
+  }
+});
+
+document.addEventListener('focusin', (e) => {
+  if (e.target.classList && e.target.classList.contains('editable')) lastFocused = e.target;
+});
+
+/* prevent nav links from navigating away while editing */
+navLinksEl.addEventListener('click', (e) => {
+  if (body.classList.contains('edit-mode')) {
+    const a = e.target.closest('a');
+    if (a) e.preventDefault();
+  }
+});
+
+/* ---------- toolbar formatting ---------- */
+toolbar.querySelectorAll('button[data-cmd], button[data-block]').forEach(btn => {
+  btn.addEventListener('mousedown', e => e.preventDefault());
+  btn.addEventListener('click', () => {
+    if (lastFocused) lastFocused.focus();
+    const cmd = btn.dataset.cmd;
+    const block = btn.dataset.block;
+    if (block) {
+      document.execCommand('formatBlock', false, '<' + block + '>');
+    } else if (cmd === 'createLink') {
+      const url = prompt('Link URL:', 'https://');
+      if (url) document.execCommand('createLink', false, url);
+    } else if (cmd) {
+      document.execCommand(cmd, false, null);
+    }
+    scheduleSave(false);
+  });
+});
+/* Delegated on document (not attached per-element) so autosave also covers
+   cards, captions, and tags added later via "+ Add" buttons — anything with
+   class "editable", created at any point, triggers a save on input. */
+document.addEventListener('input', (e) => {
+  if (e.target.classList && e.target.classList.contains('editable')) scheduleSave(false);
+});
+
+/* ---------- works cards ---------- */
+worksCards.addEventListener('click', (e) => {
+  const btn = e.target.closest('.card-remove');
+  if (btn) {
+    if (confirm('Remove this work?')) {
+      btn.closest('.card').remove();
+      scheduleSave(true);
+    }
+    return;
+  }
+  const addImgBtn = e.target.closest('.work-image-add');
+  if (addImgBtn) { openMediaModal('image', 'work', addImgBtn.closest('.work-image')); return; }
+  const replaceImgBtn = e.target.closest('.work-image-replace');
+  if (replaceImgBtn) { openMediaModal('image', 'work', replaceImgBtn.closest('.work-image')); return; }
+  const removeImgBtn = e.target.closest('.work-image-remove');
+  if (removeImgBtn) {
+    if (confirm('Remove this image?')) {
+      const slot = removeImgBtn.closest('.work-image');
+      slot.classList.remove('has-image');
+      slot.innerHTML = '<button type="button" class="work-image-add">+ Add Image</button>';
+      scheduleSave(true);
+    }
+  }
+});
+addCardBtn.addEventListener('click', () => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <button class="card-remove" type="button" title="Remove">×</button>
+    <div class="work-image"><button type="button" class="work-image-add">+ Add Image</button></div>
+    <span class="tag editable" contenteditable="true">Project</span>
+    <h3 class="editable" contenteditable="true">New work title</h3>
+    <p class="editable" contenteditable="true">Add a short description of this project.</p>`;
+  worksCards.appendChild(card);
+  card.querySelector('h3').focus();
+  scheduleSave(true);
+});
+
+/* ---------- gallery ---------- */
+function updateGalleryEmptyState(){
+  const hasBlocks = galleryItems.querySelector('.gallery-block') !== null;
+  galleryEmpty.style.display = hasBlocks ? 'none' : 'block';
+}
+function escapeAttr(s){ return String(s).replace(/"/g, '&quot;'); }
+function getYouTubeEmbed(url){
+  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/i);
+  return m ? ('https://www.youtube.com/embed/' + m[1]) : null;
+}
+function getVimeoEmbed(url){
+  const m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/i);
+  return m ? ('https://player.vimeo.com/video/' + m[1]) : null;
+}
+function buildMediaInner(type, src){
+  if (type === 'image') return `<img src="${escapeAttr(src)}" alt="">`;
+  if (type === 'audio') return `<audio controls src="${escapeAttr(src)}"></audio>`;
+  const embed = getYouTubeEmbed(src) || getVimeoEmbed(src);
+  if (embed) return `<div style="position:relative;padding-bottom:56.25%;border-radius:3px;overflow:hidden;"><iframe src="${escapeAttr(embed)}" style="position:absolute;inset:0;width:100%;height:100%;border:0" allowfullscreen></iframe></div>`;
+  return `<video controls src="${escapeAttr(src)}"></video>`;
+}
+function insertOrReplaceMedia(type, src){
+  if (currentReplaceTarget) {
+    currentReplaceTarget.querySelector('.gallery-media').innerHTML = buildMediaInner(type, src);
+    currentReplaceTarget.dataset.type = type;
+  } else {
+    const div = document.createElement('div');
+    div.className = 'gallery-block';
+    div.dataset.type = type;
+    const editing = body.classList.contains('edit-mode');
+    div.innerHTML = `<div class="gallery-media">${buildMediaInner(type, src)}</div>
+      <p class="editable gallery-caption" contenteditable="${editing}">Add a caption…</p>
+      <div class="gallery-controls">
+        <button type="button" class="gallery-replace">↻ Replace</button>
+        <button type="button" class="gallery-remove">✕ Remove</button>
+      </div>`;
+    galleryItems.appendChild(div);
+  }
+  updateGalleryEmptyState();
+  scheduleSave(true);
+}
+galleryItems.addEventListener('click', (e) => {
+  const removeBtn = e.target.closest('.gallery-remove');
+  if (removeBtn) {
+    if (confirm('Remove this media item?')) {
+      removeBtn.closest('.gallery-block').remove();
+      updateGalleryEmptyState();
+      scheduleSave(true);
+    }
+    return;
+  }
+  const replaceBtn = e.target.closest('.gallery-replace');
+  if (replaceBtn) {
+    const block = replaceBtn.closest('.gallery-block');
+    openMediaModal(block.dataset.type, 'gallery', block);
+  }
+});
+document.getElementById('addImageBtn').addEventListener('click', () => openMediaModal('image', 'gallery', null));
+document.getElementById('addAudioBtn').addEventListener('click', () => openMediaModal('audio', 'gallery', null));
+document.getElementById('addVideoBtn').addEventListener('click', () => openMediaModal('video', 'gallery', null));
+
+/* ---------- media modal ---------- */
+function openMediaModal(type, context, target){
+  currentMediaType = type;
+  currentContext = context;
+  currentReplaceTarget = (context === 'gallery') ? target : null;
+  currentWorkSlot = (context === 'work') ? target : null;
+  mmUrl.value = '';
+  mmErr.style.display = 'none';
+  mmFile.value = '';
+  mmFileName.style.display = 'none';
+  const verb = (context === 'work')
+    ? (target.classList.contains('has-image') ? 'Replace' : 'Add')
+    : (target ? 'Replace' : 'Add');
+  if (type === 'image') {
+    mmTitle.textContent = verb + ' an Image';
+    mmUrl.placeholder = 'Paste an image URL…';
+    mmUploadRow.style.display = 'block';
+  } else if (type === 'audio') {
+    mmTitle.textContent = verb + ' Audio';
+    mmUrl.placeholder = 'Paste a direct audio link (.mp3, .wav, .ogg, .m4a)…';
+    mmUploadRow.style.display = 'none';
+  } else {
+    mmTitle.textContent = verb + ' a Video';
+    mmUrl.placeholder = 'Paste a YouTube / Vimeo link, or a direct video file URL…';
+    mmUploadRow.style.display = 'none';
+  }
+  mediaOverlay.classList.add('show');
+  mmUrl.focus();
+}
+function closeMediaModal(){
+  mediaOverlay.classList.remove('show');
+  currentReplaceTarget = null;
+  currentWorkSlot = null;
+}
+mmCancel.addEventListener('click', closeMediaModal);
+mediaOverlay.addEventListener('click', (e) => { if (e.target === mediaOverlay) closeMediaModal(); });
+mmFile.addEventListener('change', () => {
+  mmFileName.style.display = mmFile.files[0] ? 'block' : 'none';
+  mmFileName.textContent = mmFile.files[0] ? ('Selected: ' + mmFile.files[0].name) : '';
+});
+mmEmbed.addEventListener('click', () => {
+  const url = mmUrl.value.trim();
+  mmErr.style.display = 'none';
+  if (url) { handleMediaResult(url); return; }
+  if (currentMediaType === 'image' && mmFile.files[0]) {
+    const file = mmFile.files[0];
+    if (file.size > 1.5 * 1024 * 1024) {
+      mmErr.textContent = 'That image is larger than 1.5MB — this browser-based storage has a small size limit. Try a smaller file, or paste a hosted link instead.';
+      mmErr.style.display = 'block';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => handleMediaResult(reader.result);
+    reader.readAsDataURL(file);
+    return;
+  }
+  mmErr.textContent = 'Paste a link, or choose a file first.';
+  mmErr.style.display = 'block';
+});
+function handleMediaResult(src){
+  if (currentContext === 'work' && currentWorkSlot) {
+    currentWorkSlot.classList.add('has-image');
+    currentWorkSlot.innerHTML = `<img src="${escapeAttr(src)}" alt="">
+      <div class="work-image-controls">
+        <button type="button" class="work-image-replace">↻ Replace</button>
+        <button type="button" class="work-image-remove">✕ Remove</button>
+      </div>`;
+    scheduleSave(true);
+  } else {
+    insertOrReplaceMedia(currentMediaType, src);
+  }
+  closeMediaModal();
+}
+
+/* ---------- save / load ---------- */
+function scheduleSave(immediate){
+  if (saveTimer) clearTimeout(saveTimer);
+  if (immediate) { saveContent(); return; }
+  saveTimer = setTimeout(saveContent, 600);
+}
+async function saveContent(){
+  try {
+    const data = collect();
+    const result = await window.storage.set(KEY_CONTENT, JSON.stringify(data), false);
+    if (result) {
+      savedPill.textContent = 'Saved';
+      savedPill.classList.add('show');
+      setTimeout(() => savedPill.classList.remove('show'), 1200);
+    }
+  } catch (e) { console.error('Save failed:', e); }
+}
+async function loadContent(){
+  try {
+    const result = await window.storage.get(KEY_CONTENT, false);
+    if (result && result.value) applyContent(JSON.parse(result.value));
+  } catch (e) {
+    // no saved content yet — defaults in the markup are used
+  } finally {
+    updateGalleryEmptyState();
+    syncEditableState();
+    adjustMainPadding();
+  }
+}
+
+resetBtn.addEventListener('click', async () => {
+  if (!confirm('Reset all content back to the default page? Your version history will be kept.')) return;
+  try { await window.storage.delete(KEY_CONTENT, false); } catch (e) {}
+  location.reload();
+});
+
+/* ---------- version history ---------- */
+async function loadHistory(){
+  try {
+    const result = await window.storage.get(KEY_HISTORY, false);
+    if (result && result.value) return JSON.parse(result.value);
+  } catch (e) {}
+  return [];
+}
+async function pushHistorySnapshot(){
+  try {
+    let list = await loadHistory();
+    list.unshift({ t: Date.now(), data: collect() });
+    const MAX = 8;
+    if (list.length > MAX) list = list.slice(0, MAX);
+    let str = JSON.stringify(list);
+    while (str.length > 4.5 * 1024 * 1024 && list.length > 1) {
+      list.pop();
+      str = JSON.stringify(list);
+    }
+    await window.storage.set(KEY_HISTORY, str, false);
+  } catch (e) { console.error('History save failed:', e); }
+}
+function formatDate(t){
+  const d = new Date(t);
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) +
+    ' · ' + d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+}
+let lastHistoryList = [];
+async function openHistory(){
+  lastHistoryList = await loadHistory();
+  if (!lastHistoryList.length) {
+    historyList.innerHTML = '<p class="mm-hint">No saved versions yet. Click "Save Version" while editing to create one.</p>';
+  } else {
+    historyList.innerHTML = lastHistoryList.map((entry, i) =>
+      `<div class="history-row"><span>${formatDate(entry.t)}</span><button class="history-restore" data-idx="${i}" type="button">Restore</button></div>`
+    ).join('');
+  }
+  historyOverlay.classList.add('show');
+}
+historyBtn.addEventListener('click', openHistory);
+historyClose.addEventListener('click', () => historyOverlay.classList.remove('show'));
+historyOverlay.addEventListener('click', (e) => { if (e.target === historyOverlay) historyOverlay.classList.remove('show'); });
+historyList.addEventListener('click', (e) => {
+  const btn = e.target.closest('.history-restore');
+  if (!btn) return;
+  const idx = +btn.dataset.idx;
+  const entry = lastHistoryList[idx];
+  if (!entry) return;
+  if (!confirm('Restore this version? It will replace your current content.')) return;
+  applyContent(entry.data);
+  updateGalleryEmptyState();
+  syncEditableState();
+  scheduleSave(true);
+  historyOverlay.classList.remove('show');
+});
+saveVersionBtn.addEventListener('click', async () => {
+  await pushHistorySnapshot();
+  savedPill.textContent = 'Version saved';
+  savedPill.classList.add('show');
+  setTimeout(() => savedPill.classList.remove('show'), 1500);
+});
+
+/* ---------- escape key closes modals ---------- */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    mediaOverlay.classList.remove('show');
+    historyOverlay.classList.remove('show');
+  }
+});
+
+loadContent();
+</script>
+</body>
+</html>
